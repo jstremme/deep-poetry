@@ -40,7 +40,7 @@ def get_vocab_dicts(vocab):
 
     return words2vecs, vecs2words
 
-data_path = '/home/joel_stremmel/Documents/dev_gear/deep_learning/lstms/lstm_words/stacked_poems'
+data_path = 'stacked_poems'
 vocab, sentence_sequences = create_embeddings(data_path, size=100, min_count=1, window=5, sg=1, iter=25)
 dictionary, reverse_dictionary = get_vocab_dicts(vocab)
 
