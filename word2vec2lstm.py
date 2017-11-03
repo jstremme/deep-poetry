@@ -12,7 +12,6 @@ from keras.layers import Dense, Dropout
 from keras.layers.recurrent import LSTM
 from sklearn.metrics.pairwise import cosine_similarity
 
-
 def create_embeddings(data_dir, **params):
 
     tokenize = lambda x: simple_preprocess(x)
@@ -57,7 +56,6 @@ for i in range(0,text_size-seq_len, 3):
     sentences.append(text[i:i+seq_len])
     next_words.append(text[i+seq_len])
 
-
 X_train = np.zeros((len(sentences), seq_len, vec_len))
 y_train = np.zeros((len(sentences), vec_len))
 print(X_train.shape)
@@ -77,7 +75,7 @@ model.add(Dropout(0.5))
 model.add(Dense(vec_len, activation='softmax'))
 model.compile(optimizer=keras.optimizers.rmsprop(lr=0.007), loss='categorical_crossentropy')
 
-for it in range(1000):
+for it in range(10):
 
     print('=' * 70)
     print('iteration: {}'.format(it))
