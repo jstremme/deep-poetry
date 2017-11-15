@@ -59,11 +59,9 @@ for i, sentence in enumerate(sentences):
 batch_size = 128
     
 model = Sequential()
-model.add(LSTM(1024, input_shape=(seq_len, vec_len), return_sequences=True, implementation=1))
-model.add(Dropout(0.5))
-model.add(LSTM(512, input_shape=(seq_len, vec_len), implementation=1))
-model.add(Dropout(0.5))
-model.add(LSTM(256, input_shape=(seq_len, vec_len), implementation=1))
+model.add(LSTM(300, input_shape=(seq_len, vec_len), return_sequences=True, implementation=1))
+model.add(Dropout(0.25))
+model.add(LSTM(150, input_shape=(seq_len, vec_len), implementation=1))
 model.add(Dense(vec_len, activation='softmax'))
 model.compile(optimizer=keras.optimizers.rmsprop(lr=0.007), loss='categorical_crossentropy')
 
