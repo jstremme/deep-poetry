@@ -28,7 +28,7 @@ def create_embeddings(data_dir, **params):
 
     sentences = SentenceGenerator(data_dir)
     model = Word2Vec(sentences, **params)
-    words2vecs = dict([(k.encode('ascii', 'ignore'), model.wv[k]) for k, v in model.wv.vocab.items()])
+    words2vecs = dict([(k, model.wv[k]) for k, v in model.wv.vocab.items()])
 
     return words2vecs, sentences
 
