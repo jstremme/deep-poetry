@@ -59,9 +59,11 @@ for i, sentence in enumerate(sentences):
 batch_size = 128
     
 model = Sequential()
-model.add(LSTM(150, input_shape=(seq_len, vec_len), return_sequences=True, implementation=1))
-model.add(Dropout(0.25))
-model.add(LSTM(150, input_shape=(seq_len, vec_len), implementation=1))
+model.add(LSTM(1024, input_shape=(seq_len, vec_len), return_sequences=True, implementation=1))
+model.add(Dropout(0.5))
+model.add(LSTM(512, input_shape=(seq_len, vec_len), implementation=1))
+model.add(Dropout(0.5))
+model.add(LSTM(256, input_shape=(seq_len, vec_len), implementation=1))
 model.add(Dense(vec_len, activation='softmax'))
 model.compile(optimizer=keras.optimizers.rmsprop(lr=0.007), loss='categorical_crossentropy')
 
@@ -71,10 +73,8 @@ for it in range(50):
     print('iteration: {}'.format(it))
     model.fit(X_train, y_train, batch_size=batch_size, epochs=1, verbose=1)
     startIndex = np.random.randint(0,text_size-seq_len-1)
-    generated = ' '
     sentence = text[startIndex:startIndex+seq_len]
-    generated = generated.join(sentence)
-    print("generating with seed: \n\n{}".format(generated))
+    print("generating with seed: \n\n{}".format(sentence))
     
     for w in range(0, 20):
 
@@ -92,9 +92,6 @@ for it in range(50):
         most_similar_tuple = sorted(similarities_dict.items(), key=operator.itemgetter(1))[-1]
         print(most_similar_tuple) 
         next_word = most_similar_tuple[0]
-
-        generated += next_word
-        sentence = sentence[1:]
-        sentence.append(next_word)
+        sentence = sentence[1:] + [next_word]
 
     print(sentence)
