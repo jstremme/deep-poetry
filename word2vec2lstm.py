@@ -13,6 +13,8 @@ from keras.layers import Dense, Dropout
 from keras.layers.recurrent import LSTM
 from sklearn.metrics.pairwise import cosine_similarity
 
+# merry christmas, you filthy animal
+
 def create_embeddings(data_dir, **params):
 
     tokenize = lambda x: simple_preprocess(x)
